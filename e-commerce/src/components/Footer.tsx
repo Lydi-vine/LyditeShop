@@ -30,13 +30,13 @@ const Footer: React.FC = () => {
               <a href="/">Home</a>
             </li>
             <li className="mb-2 hover:text-gray-300 font-bold">
-              <a href="/category">Categories</a>
+              <a href="/Store">Store</a>
             </li>
             <li className="mb-2 hover:text-gray-300 font-bold">
-              <a href="/about">Popular</a>
+              <a href="#popular">Popular</a>
             </li>
             <li className="mb-2 hover:text-gray-300 font-bold">
-              <a href="/contact">Orders</a>
+              <a href="#latest">Latest</a>
             </li>
           </ul>
         </div>
@@ -45,13 +45,13 @@ const Footer: React.FC = () => {
         <div className="mb-4 md:mb-0">
           <h4 className="text-lg text-orange-500 font-semibold mb-4">Follow Us</h4>
           <div className="flex space-x-4 px-14">
-            <a href="#" className="hover:text-gray-300">
+            <a href="https://web.facebook.com/bobo.belinda" className="hover:text-gray-300" target="_blank" rel="noopener noreferrer">
               <FaFacebook size={24} />
             </a>
-            <a href="#" className="hover:text-gray-300 ">
+            <a href="https://x.com/BonteIradukunda" className="hover:text-gray-300 " target="_blank" rel="noopener noreferrer">
               <FaTwitter size={24} />
             </a>
-            <a href="#" className="hover:text-gray-300">
+            <a href="https://www.instagram.com/ira.validz/" className="hover:text-gray-300" target="_blank" rel="noopener noreferrer">
               <FaInstagram size={24} />
             </a>
           </div>

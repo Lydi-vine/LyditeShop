@@ -1,4 +1,3 @@
-// Popular.tsx
 import { FC, useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import pop1 from '../images/pop1.jpeg';
@@ -16,9 +15,18 @@ const products = [
 // ProductCard Component
 const ProductCard: FC<{ product: typeof products[0] }> = ({ product }) => {
   const { addToCart } = useCart(); // Destructure addToCart from useCart
+  const [notificationVisible, setNotificationVisible] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    setNotificationVisible(true);
+    setTimeout(() => {
+      setNotificationVisible(false);
+    }, 2000); // Hide notification after 2 seconds
+  };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4">
+    <div className="bg-white rounded-2xl shadow-md p-4 relative">
       <img
         src={product.image}
         alt={product.name}
@@ -36,10 +44,15 @@ const ProductCard: FC<{ product: typeof products[0] }> = ({ product }) => {
       </div>
       <p className="text-xl font-bold mt-2">${product.price}</p>
       <button
-        onClick={() => addToCart(product)} // Add to cart button
+        onClick={handleAddToCart} // Add to cart button
         className="mt-4 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded text-sm mr-2 cursor-pointer">
         Add to Cart
       </button>
+      {notificationVisible && (
+        <div className="absolute top-0 right-0 mt-2 mr-2 bg-green-500 text-white text-sm rounded px-2 py-1">
+          Item added to cart
+        </div>
+      )}
     </div>
   );
 };
@@ -85,7 +98,7 @@ const Popular = () => {
       {/* Search Input */}
       <div className="mb-4 text-center">
         <input
-          type="text"
+          type ="text"
           className="w-1/2 p-2 border border-gray-300 rounded-md"
           placeholder="Search by name, category, or price"
           value={searchTerm}

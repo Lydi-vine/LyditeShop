@@ -25,6 +25,7 @@ import d from '../images/pop1.jpeg';
 import e from '../images/pop2.jpeg';
 import f from '../images/pop3.jpeg';
 import a from '../images/pop4.jpeg';
+import Footer from './Footer';
 
 const allProducts = [
   { id: 1, name: 'Wallet case', price: 6.94, image: a, category: 'iPhone 13 Pro', rating: 5 },
@@ -44,7 +45,7 @@ const allProducts = [
   { id: 15, name: 'Galaxy Planet', price: 3.12, image: o, category: 'Samsung A05s', rating: 3 },
   { id: 16, name: 'Black $ White', price: 1.73, image: p, category: 'Phone sockets', rating: 3 },
   { id: 17, name: 'Shiny with phone grip', price: 3.12, image: q, category: 'Iphone 13', rating: 4 },
-  { id: 18, name: 'Simple Butterfly', price: 2.77, image: r, category: 'Tecno pop 5', rating: 3 },
+  { id: 18, name: 'Simple Butterfly', price : 2.77, image: r, category: 'Tecno pop 5', rating: 3 },
   { id: 19, name: 'Round Phone stickers', price: 2.08, image: s, category: 'Phone stickers', rating: 4 },
   { id: 20, name: 'Chinese dynasty case', price: 2.98, image: t, category: 'iPhone 12 Pro', rating: 4 },
   { id: 21, name: 'Rectangular Phone stickers', price: 2.08, image: u, category: 'Phone stickers', rating: 4 },
@@ -62,11 +63,20 @@ const ProductCard: React.FC<{
     category: string;
     rating: number;
   };
+}> = ({ product }) => {
+  const { addToCart } = useCart();
+  const [notificationVisible, setNotificationVisible] = useState(false);
 
-  }> = ({ product }) => {
-    const { addToCart } = useCart();
-    return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+  const handleAddToCart = () => {
+    addToCart(product);
+    setNotificationVisible(true);
+    setTimeout(() => {
+      setNotificationVisible(false);
+    }, 3000); // Hide notification after 2 seconds
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md overflow-hidden relative">
       <div className="relative">
         <img src={product.image} alt={product.name} className="w-70 h-80 m-auto" />
       </div>
@@ -83,10 +93,15 @@ const ProductCard: React.FC<{
         </div>
         <p className="text-xl font-bold mt-2">${product.price}</p>
         <button
-        onClick={() => addToCart(product)} // Add to cart button
-        className="mt-4 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded text-sm mr-2 cursor-pointer">
-        Add to Cart
-      </button>
+          onClick={handleAddToCart} // Add to cart button
+          className="mt-4 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded text-sm mr-2 cursor-pointer">
+          Add to Cart
+        </button>
+        {notificationVisible && (
+          <div className="absolute top-0 right-0 mt-2 mr-2 bg-green-500 text-white text-sm rounded px-2 py-1">
+            Item added to cart
+          </div>
+        )}
       </div>
     </div>
   );
@@ -132,10 +147,8 @@ const Store: React.FC = () => {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-
+      <Footer />
     </div>
-
-
   );
 };
 
