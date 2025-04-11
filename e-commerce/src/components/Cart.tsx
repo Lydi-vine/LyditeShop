@@ -1,15 +1,16 @@
 import React from 'react';
 import { useCart } from '../components/CartContext';
+import { Link } from 'react-router-dom';
 
 const Cart: React.FC = () => {
   const { cart, removeFromCart, updateQuantity, totalPrice } = useCart();
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-bold mb-6 mr-15">Your Cart</h2>
+      <h2 className="text-3xl font-bold mb-6 mr-15 text-center">Shopping Bag</h2>
 
       {cart.length === 0 ? (
-        <p className="text-gray-600">Nothing to.</p>
+        <p className="text-gray-600 text-center">There is nothing in the cart. <Link to="/Store" className='cursor-pointer text-orange-500 font-bold underline'>Get Yours Now!!</Link></p>
       ) : (
         <>
           <div className="space-y-6">
@@ -25,16 +26,16 @@ const Cart: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => updateQuantity(product.id, quantity - 1)}
-                    className="bg-gray-300 text-sm px-2 py-1 rounded">−</button>
+                    className="bg-gray-300 text-sm px-2 py-1 rounded cursor-pointer">−</button>
                   <span className="text-lg font-semibold">{quantity}</span>
                   <button
                     onClick={() => updateQuantity(product.id, quantity + 1)}
-                    className="bg-gray-300 text-sm px-2 py-1 rounded">+</button>
+                    className="bg-gray-300 text-sm px-2 py-1 rounded cursor-pointer">+</button>
                 </div>
 
                 <button
                   onClick={() => removeFromCart(product.id)}
-                  className="text-red-500 font-semibold hover:underline">
+                  className="text-red-500 font-semibold cursor-pointer">
                   Remove
                 </button>
               </div>

@@ -1,4 +1,3 @@
-// Latest.tsx
 import React, { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import Shiny from '../images/lat1.jpeg';
@@ -25,9 +24,18 @@ const ProductCard: React.FC<{
   };
 }> = ({ product }) => {
   const { addToCart } = useCart(); // Destructure addToCart from useCart
+  const [notificationVisible, setNotificationVisible] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    setNotificationVisible(true);
+    setTimeout(() => {
+      setNotificationVisible(false);
+    }, 2000); // Hide notification after 2 seconds
+  };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden relative">
       <div className="relative">
         <img src={product.image} alt={product.name} className="w-70 h-80 m-auto" />
       </div>
@@ -44,10 +52,15 @@ const ProductCard: React.FC<{
         </div>
         <p className="text-xl font-bold mt-2">${product.price}</p>
         <button
-          onClick={() => addToCart(product)} // Add to cart button
+          onClick={handleAddToCart} // Add to cart button
           className="mt-4 bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded text-sm mr-2 cursor-pointer">
           Add to Cart
         </button>
+        {notificationVisible && (
+          <div className="absolute top-0 right-0 mt-2 mr-2 bg-green-500 text-white text-sm rounded px-2 py-1">
+            Item added to cart
+          </div>
+        )}
       </div>
     </div>
   );

@@ -12,22 +12,23 @@ const Navbar: FC = () => {
   return (
     <div>
       <nav className="w-full flex flex-wrap justify-between items-center px-6 py-4 bg-white shadow-lg cursor-pointer">
-        {/* Logo */}
+        <Link to="/">
         <img src={logo} alt="Logo" className="w-60 h-auto object-contain" />
+        </Link>
 
         {/* Nav Links */}
-        <ul className="flex flex-row gap-6 text-[20px] font-medium text-orange-700">
-          <li className="hover:text-orange-700">
+        <ul className="flex flex-row gap-6 text-[20px] font-medium text-orange-500">
+          <li className="">
             <Link to="/">Home</Link>
           </li>
-          <li className="hover:text-orange-700">
+          <li className="">
             <Link to="/store">Store</Link>
           </li>
           <a href="#popular">
-            <li className="hover:text-orange-700">Popular</li>
+            <li className="">Popular</li>
           </a>
           <a href="#latest">
-            <li className="hover:text-orange-700">Latest</li>
+            <li className="">Latest</li>
           </a>
         </ul>
 
