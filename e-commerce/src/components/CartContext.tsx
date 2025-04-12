@@ -27,8 +27,14 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
-    const stored = localStorage.getItem('cart');
-    return stored ? JSON.parse(stored) : [];
+    try {
+      const stored = localStorage.getItem('cart');
+      const parsed = stored ? JSON.parse(stored) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (error) {
+      console.error("Failed to parse cart from localStorage", error);
+      return [];
+    }
   });
 
   useEffect(() => {
@@ -64,10 +70,9 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  const totalPrice = cart.reduce(
-    (total, item) => total + item.product.price * item.quantity,
-    0
-  );
+  const totalPrice = Array.isArray(cart)
+    ? cart.reduce((total, item) => total + item.product.price * item.quantity, 0)
+    : 0;
 
   return (
     <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, totalPrice }}>
