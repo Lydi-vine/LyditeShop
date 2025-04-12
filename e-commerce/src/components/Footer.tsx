@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
             <a href="https://web.facebook.com/bobo.belinda" className="hover:text-gray-300" target="_blank" rel="noopener noreferrer">
               <FaFacebook size={24} />
             </a>
-            <a href="https://x.com/BonteIradukunda" className="hover:text-gray-300 " target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/im_lydivine" className="hover:text-gray-300 " target="_blank" rel="noopener noreferrer">
               <FaTwitter size={24} />
             </a>
             <a href="https://www.instagram.com/ira.validz/" className="hover:text-gray-300" target="_blank" rel="noopener noreferrer">
